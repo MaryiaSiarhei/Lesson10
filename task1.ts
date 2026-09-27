@@ -37,17 +37,17 @@ class Square extends Figure {
 
   // Получение площади
   getArea(): number {
-    return 0;
+    return this.side * this.side;
   }
 
   // Получение периметра
   getPerimeter(): number {
-    return 0;
+    return 4 * this.side;
   }
 
   // Получение описания
   getDescription(): string {
-    return "";
+    return `Square with side ${this.side}`;
   }
 }
 
@@ -64,21 +64,48 @@ class Rectangle extends Figure {
 
   // Получение площади
   getArea(): number {
-    return 0;
+    return this.height * this.width;
   }
 
   // Получение периметра
   getPerimeter(): number {
-    return 0;
+    return 2 * this.height + 2 * this.width;
   }
 
   // Получение описания
   getDescription(): string {
-    return "";
+    return `Rectangle with width ${this.width} and height ${this.height}`;
   }
 }
 
 //Класс Triangle
+class Triangle extends Figure {
+  //  Добавление приватных свойств ширина и высоты
+  constructor(
+    private readonly side1: number,
+    private readonly side2: number,
+    private readonly side3: number,
+  ) {
+    // Указание типа при создании класса
+    super(FigureType.Triangle);
+  }
+
+  // Получение площади
+  getArea(): number {
+    const p = this.getPerimeter() / 2;
+    return Math.sqrt(p * (p - this.side1) * (p - this.side2) * (p - this.side3));
+  }
+
+  // Получение периметра
+  getPerimeter(): number {
+    return this.side1 + this.side2 + this.side3;
+  }
+
+  // Получение описания
+  getDescription(): string {
+    return `Triangle with ${this.side1}, ${this.side2} and ${this.side3}`;
+  }
+}
 
 // Пример использования
 const square = new Square(5);
@@ -97,8 +124,8 @@ console.log(rectangle.getDescription()); // Rectangle with width 4 and height 6
 
 console.log("-----------");
 
-// const triangle = new Triangle(3, 4, 5);
-// console.log(triangle.getArea()); // 6
-// console.log(triangle.getPerimeter()); // 12
-// console.log(triangle.getType()); // triangle
-// console.log(triangle.getDescription()); // Triangle with side1 3, side2 4 and side3 5
+const triangle = new Triangle(3, 4, 5);
+console.log(triangle.getArea()); // 6
+console.log(triangle.getPerimeter()); // 12
+console.log(triangle.getType()); // triangle
+console.log(triangle.getDescription()); // Triangle with side1 3, side2 4 and side3 5
